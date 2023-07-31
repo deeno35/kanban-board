@@ -8,6 +8,9 @@ RUN npm run build
 
 ### STAGE 2: Run ###
 FROM nginx:1.17.1-alpine
-COPY default.conf /etc/nginx/conf.d/default.conf
+COPY default.conf.template /etc/nginx/conf.d/default.conf.template
 COPY --from=build /usr/src/app/dist/kanban-ui /usr/share/nginx/html
 EXPOSE 80
+COPY docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["nginx", "-g", "daemon off;"]

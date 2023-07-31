@@ -5,7 +5,7 @@ server {
     index index.html index.html;
 
     location /api/kanbans {
-        proxy_pass http://kanban-app:8080/api/kanbans;
+        proxy_pass http://${API_HOST}:${API_PORT}/api/kanbans;
     }
 
     location /api/tasks {
